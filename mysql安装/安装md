@@ -1,0 +1,205 @@
+1.安装官网
+
+https://dev.mysql.com/downloads/mysql/
+
+- 尽量使用压缩包安装，不要用exe安装
+
+2.安装Mysql
+
+1.解压到指定目录
+
+2.添加环境变量：将*mysql安装文件夹下面的bin文件夹*添加到环境变量中(我的电脑–>属性–>高级系统设置–>环境变量,**这里需要注意是否以前有安装过老版本的Mysql\，需要将其环境变量去掉**)
+
+3.在 mysql安装文件夹下面新建 ==my.ini== 文件
+
+4.编辑==my.ini== 文件
+
+```python
+[mysqld]
+# 路径注意使用反斜杠 / 或者 双杠 \\
+port = 3306
+basedir=[安装目录]
+datadir=[安装目录]/data/	# 不要手动新建，会自动生成data文件夹
+
+```
+
+5.启动管理员模式下的CMD,运行所有的命令。(注意是管理员模式)
+
+-  启动管理员模式下的cmd，并将路径切换至mysql安装目录下的bin目录，输入以下命令
+
+    cd \e  E:\database\mysql8\mysql-8.0.21-winx64\bin
+
+    (这里的路径要换成自己的)
+
+    mysqld –install
+
+- 如果执行后报错（如果下面的错误你都没出现过那就跳过）
+
+![MySQL8.0.21安装教程（Windows系统）6](https://res-static.hc-cdn.cn/fms/img/089df9edf7fbde5a95c4398101fc8bad1603781415144.png)
+
+- 安装了以下运行库成功解决
+
+    ![MySQL8.0.21安装教程（Windows系统）7](https://res-static.hc-cdn.cn/fms/img/95e55786d7bb3db87dd5df3e421f8f221603781415144.png)
+
+    链接：https://pan.baidu.com/s/1EQBmbdD3L4hfuBBzDUizDA
+
+    提取码：xbw1
+
+- 下载安装后**继续执行安装服务命令：**
+
+    ![MySQL8.0.21安装教程（Windows系统）8](https://res-static.hc-cdn.cn/fms/img/d7fac2fee7730ee8ca554eb9383853d31603781415144.png)
+
+- 提示服务已存在，因为之前有安装过5.7.26版本的mysql，没有卸载
+
+    这个时候重新以管理员身份打开cmd，输入命令sc query mysql查看名为mysql的服务
+
+    ![MySQL8.0.21安装教程（Windows系统）9](https://res-static.hc-cdn.cn/fms/img/4f36b975f5f044033f5dbe130871e0e31603781415144.png)
+
+    输入命令sc delete mysql，删除老版mysql服务
+
+    ![MySQL8.0.21安装教程（Windows系统）10](https://res-static.hc-cdn.cn/fms/img/899d340f0074bdc25868a5629c0b1eac1603781415144.png)
+
+    再次执行安装命令
+
+    ![MySQL8.0.21安装教程（Windows系统）11](https://res-static.hc-cdn.cn/fms/img/88ef4f3f8c23957fb2d776fde47e862f1603781415144.png)
+
+6.再输入 `mysqld --initialize-insecure --user=mysql` 初始化数据文件
+
+7.输入 `net start mysql` 启动mysql服务
+
+![image-20210423003244524](https://camo.githubusercontent.com/abe29716e169edbb539126cccf7a7fea6101360317415a6491a7efaceeadad4f/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333030333234353131302d313539333832363831342e706e67)
+
+8.输入 `mysql -uroot -p` 进入mysql
+
+9.输入 `alter user 'root'@'localhost' identified with mysql_native_password by '123456';` 修改密码为123456
+
+10.输入 `mysql -u root -p123456` 进去mysql
+
+![image-20210423012447845](https://camo.githubusercontent.com/0cb4081c5ae5c01afc3d8782d68401495f2e746b777917faf86c567f0a00c817/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333031323435303937372d3134373039383936352e706e67)
+
+11.输入exit退出mysql
+
+12.输入 `net stop mysql` 停止mysql服务
+
+**==清空mysql服务==** (卸载mysql才需要使用) **==慎用==**
+
+```python
+sc delete mysql
+
+```
+
+> #### SQLyog
+
+1、 https://sqlyog.en.softonic.com/ 社区版下载链接
+
+2、 直接安装
+
+3、 打开SQLyog, 在 ==启动mysql服务后== 连接登录
+
+[![image-20210423121640169](https://camo.githubusercontent.com/bb8fa31801032cd1593152e693b81f321bff9fdfb6a4c7e1e952432981fb48f8/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313634313235342d3134393233313430302e706e67)](https://camo.githubusercontent.com/bb8fa31801032cd1593152e693b81f321bff9fdfb6a4c7e1e952432981fb48f8/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313634313235342d3134393233313430302e706e67)
+
+4、连接成功
+
+[![image-20210423121722857](https://camo.githubusercontent.com/3012e9303758980f21ecae9f0ca61df3d87c185a140c545b8988b33bc9548d5e/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313732333436382d3938393436333632342e706e67)](https://camo.githubusercontent.com/3012e9303758980f21ecae9f0ca61df3d87c185a140c545b8988b33bc9548d5e/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313732333436382d3938393436333632342e706e67)
+
+5、 新建一个数据库
+
+[![image-20210423121914985](https://camo.githubusercontent.com/b1fa20d6a5ea1af7d9e24abbb7d3871919c3983c681131a1fd7ef2bf61c209f6/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313931353532322d313937393037343833332e706e67)](https://camo.githubusercontent.com/b1fa20d6a5ea1af7d9e24abbb7d3871919c3983c681131a1fd7ef2bf61c209f6/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132313931353532322d313937393037343833332e706e67)
+
+相当于 **sql** 代码
+
+```
+CREATE DATABASE `school`CHARACTER SET utf8 COLLATE utf8_general_ci; 
+```
+
+==sqlyog中的每一个执行操作，本质就是对应了一个sql语句执行，可以在软件的历史记录中使用==
+
+6、 新建一张表
+
+```
+字段: id, name, age
+```
+
+[![image-20210423122748084](https://camo.githubusercontent.com/59e5824abd9edbf36db221e1aeb7e8bff5d3981d8e3650225978b519a3df3433/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132323734383731332d3338303839343239302e706e67)](https://camo.githubusercontent.com/59e5824abd9edbf36db221e1aeb7e8bff5d3981d8e3650225978b519a3df3433/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333132323734383731332d3338303839343239302e706e67)
+
+```
+CREATE TABLE `school`.`student` ( `id` INT(10) NOT NULL COMMENT '学员id', `name` VARCHAR(100) NOT NULL COMMENT '学员姓名', `age` INT(3) NOT NULL COMMENT '学员年龄', PRIMARY KEY (`id`) ) ENGINE=INNODB CHARSET=utf8 COLLATE=utf8_general_ci; 
+```
+
+7、 查看表
+
+8、 尝试添加多条记录
+
+## 命令行SQL语句
+
+> 连接数据库
+
+命令行连接
+
+```
+mysql -uroot -p			--连接数据库
+--然后输入密码
+```
+
+[![image-20210423170233118](https://camo.githubusercontent.com/30a8a09d6cd3365aecb100b40cb7ff1c1710d77ab77ec3d43962d14eb73020f5/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333137303233343232352d3939383931313131312e706e67)](https://camo.githubusercontent.com/30a8a09d6cd3365aecb100b40cb7ff1c1710d77ab77ec3d43962d14eb73020f5/68747470733a2f2f696d67323032302e636e626c6f67732e636f6d2f626c6f672f323231333636302f3230323130342f323231333636302d32303231303432333137303233343232352d3939383931313131312e706e67)
+
+> 简单的语句 ==**注意所有的sql语句都需要以分号结尾**==
+
+```
+show databases;		--查看所有的数据库
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| school             |
+| sys                |
++--------------------+
+---------------------------------------------------
+
+use school;			-- 切换/使用数据库
+Database changed
+
+show tables;		-- 查看数据库中的所有表
++------------------+
+| Tables_in_school |
++------------------+
+| student          |
++------------------+
+-------------------------------------------------			
+
+describe student;		-- 显示数据库中指定表的结构
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | NO   | PRI | NULL    |       |
+| name  | varchar(100) | NO   |     | NULL    |       |
+| age   | int          | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+-------------------------------------------------------
+
+create database test;	-- 创建数据库
+
+drop database test;			-- 删除数据库
+
+exit;    	-- 退出
+
+-- 单行注释
+/*		(多行注释)
+lka
+aga
+gasd
+*/
+```
+
+
+
+最后：要熟练掌握数据库的话就必须掌握这几门语言
+
+1. DDL: 数据库定义语言
+2. DML: 数据库操作与管理语言
+3. DQL: 数据库查询语言
+4. DCL: 数据库控制语言
+
+快去学习叭！
